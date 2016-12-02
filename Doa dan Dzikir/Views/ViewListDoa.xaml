@@ -1,0 +1,93 @@
+﻿<Page
+    x:Class="Doa_dan_Dzikir.Views.ViewListDoa"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Doa_dan_Dzikir.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1024"></AdaptiveTrigger> 
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="listDoa.Visibility" Value="Visible"/>
+                        <Setter Target="listviewDoa.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="tablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="listDoa.Visibility" Value="Visible"/>
+                        <Setter Target="listviewDoa.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="mobile">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="listDoa.Visibility" Value="Collapsed"/>
+                        <Setter Target="listviewDoa.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <GridView 
+            Visibility="Visible"
+            Name="listDoa"
+            ItemsSource="{Binding CollectionDoa}"
+            SelectionChanged="listDoa_SelectionChanged" 
+            Margin="20,0,0,0"
+            >
+            <GridView.ItemTemplate>
+                <DataTemplate >
+                    <Grid Background="White" Width="270" MinHeight="250">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Image Name="tumbnail" Source="{Binding tumbnail}"/>
+                        <RelativePanel Grid.Row="1" Padding="10">
+                            <TextBlock Name="kategori" Text="{Binding namaKategori}" 
+                                       RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True"
+                                       FontWeight="Bold"/>
+                            <TextBlock Name="Judul" RelativePanel.Below="kategori" Text="{Binding judulDoa}" Margin="0,10,0,0"/>
+                        </RelativePanel>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+            <GridView.ItemContainerStyle>
+                <Style TargetType="FrameworkElement">
+                    <Setter Property="Margin" Value="20"/>
+                </Style>
+            </GridView.ItemContainerStyle>
+        </GridView>
+
+        <ListView Name="listviewDoa"
+                  ItemsSource="{Binding CollectionDoa}"
+                  SelectionChanged="listviewDow_SelectionChanged"
+                  Margin="20,0,0,0"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Name="tumbnail" Source="{Binding tumbnail}"/>
+                        <RelativePanel Grid.Row="1" Padding="10">
+                            <TextBlock Name="kategori" Text="{Binding namaKategori}" 
+                                       RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True"
+                                       FontWeight="Bold"/>
+                            <TextBlock Name="Judul" RelativePanel.Below="kategori" Text="{Binding judulDoa}" Margin="0,10,0,0"/>
+                        </RelativePanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
